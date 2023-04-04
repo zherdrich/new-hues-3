@@ -6,6 +6,7 @@ function App() {
   return (
     <div className="App">
       <h1>new hues</h1>
+      <div>testing</div>
     </div>
   );
 }
