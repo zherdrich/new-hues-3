@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
 
@@ -9,8 +10,22 @@ const REDIRECT_URI = "http://localhost:3000"
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const RESPONSE_TYPE = "token"
 
+const [token, setToekn] = useState("")
+
+useEffect(() => {
+   const hash = window.location.hash
+   let token = window.localStorage.getItem("token")
+
+   if(!token && hash) {
+    token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
+    
+    console.log(token)
+   }
 
 
+
+
+}, [])
 
   return (
     <div className="App">
