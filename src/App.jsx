@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function App() {
 
@@ -32,12 +33,20 @@ useEffect(() => {
 
 }, [])
 
+const logout = () => {
+  setToken("")
+  window.localStorage.removeItem("token")
+}
+
   return (
     <div className="App">
       <h1>new hues</h1>
 
-
+{
+!token ?
       <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login</a>
+      : <button onClick={logout}>Logout</button>
+}
     </div>
   );
 }
