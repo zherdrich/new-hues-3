@@ -10,17 +10,21 @@ const REDIRECT_URI = "http://localhost:3000"
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const RESPONSE_TYPE = "token"
 
-const [token, setToekn] = useState("")
+const [token, setToken] = useState("")
 
 useEffect(() => {
    const hash = window.location.hash
-   let token = window.localStorage.getItem("token")
+   let token = window.localStorage.getItem("token");
 
    if(!token && hash) {
 
-    token = hash.substring(1).split('&').find(elem => elem.startsWith('access_token')).split('=')[1]
-
-    console.log(token)
+    // token = hash.substring(1).split('&').find(elem => elem.startsWith('access_token')).split('=')[1]
+    let urlParams = new URLSearchParams(window.location.hash.replace("#","?"));
+    let token = urlParams.get('access_token')
+   
+    window.location.hash = ""
+    window.localStorage.setItem("token", token)
+    setToken(token)
    }
 
 
